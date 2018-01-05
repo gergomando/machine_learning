@@ -1,0 +1,16 @@
+{
+  "name": "ning)",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gergo Mando",
+  "license": "ISC",
+  "devDependencies": {
+    "csvtojson": "^1.1.9",
+    "ml-regression": "^4.4.2",
+    "node-es6": "^0.3.1"
+  }
+}
