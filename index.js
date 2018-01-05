@@ -19,12 +19,12 @@ const rl = readline.createInterface({
 csv()
   .fromFile(csvFilePath)
   .on('json', (jsonObj) => {
-  csvData.push(jsonObj);
-})
-.on('done', () => {
-  dressData(); // To get data points from JSON Objects
-performRegression();
-});
+    csvData.push(jsonObj);
+  })
+  .on('done', () => {
+    dressData(); // To get data points from JSON Objects
+    performRegression();
+  });
 
 function performRegression() {
   regressionModel = new SLR(X, y); // Train the model on training data
@@ -33,10 +33,22 @@ function performRegression() {
 }
 
 function dressData() {
+  /**
+   * One row of the data object looks like:
+   * {
+     *   TV: "10",
+     *   Radio: "100",
+     *   Newspaper: "20",
+     *   "Sales": "1000"
+     * }
+   *
+   * Hence, while adding the data points,
+   * we need to parse the String value as a Float.
+   */
   csvData.forEach((row) => {
     X.push(f(row.radio));
-  y.push(f(row.sales));
-});
+    y.push(f(row.sales));
+  });
 }
 
 function f(s) {
@@ -46,6 +58,6 @@ function f(s) {
 function predictOutput() {
   rl.question('Enter input X for prediction (Press CTRL+C to exit) : ', (answer) => {
     console.log(`At X = ${answer}, y =  ${regressionModel.predict(parseFloat(answer))}`);
-  predictOutput();
-});
+    predictOutput();
+  });
 }
